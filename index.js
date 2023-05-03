@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 //useage of route
 app.use('/api/v1/auth', AuthRoute);
 app.use('/api/v1/user', UserRoute);
+app.use('/api/v1/recipe', RecipeRoute);
 app.use('/api/v1/posts', PostRoute);
 app.use('/api/v1/upload', UploadRoute);
 app.use('/api/v1/chat', ChatRoute);

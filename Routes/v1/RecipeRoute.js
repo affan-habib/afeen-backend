@@ -10,22 +10,22 @@ import  {
 
 const router = express.Router();
 
-// Get all recipes
-router.get('/recipes', getAllRecipes);
+// Get all 
+router.get('/', getAllRecipes);
 
 // Create a new user
-router.post('/recipes', createRecipe);
+router.post('/', createRecipe);
 
 // Get a user by ID
-router.get('/recipes/:id', getRecipeById);
+router.get('/:id', getRecipeById);
 
 // Update a user by ID
-router.put('/recipes/:id', updateRecipeById);
+router.put('/:id', updateRecipeById);
 
 // Delete a user by ID
-router.delete('/recipes/:id', deleteRecipeById);
+router.delete('/:id', deleteRecipeById);
 
-// Search and filter recipes
-router.get('/recipes/search', searchRecipes);
+// Search and filter 
+router.get('/search', searchRecipes);
 
 export default router;
