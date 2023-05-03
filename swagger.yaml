@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Recipes API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /api/v1/recipe:
+    get:
+      summary: Get all recipes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+    post:
+      summary: Create a new recipe
+      requestBody:
+        description: Recipe object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeInput'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+components:
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          example: 644fd91c51eaefc24989d5c4
+        title:
+          type: string
+          example: Spaghetti Bolognese
+        description:
+          type: string
+          example: A classic Italian dish with ground beef, tomatoes, and herbs.
+        ingredients:
+          type: array
+          items:
+            type: string
+            example: 1 pound spaghetti
+        category:
+          type: string
+          example: Pasta
+        instructions:
+          type: array
+          items:
+            type: string
+            example: Cook the spaghetti according to package directions.
+        createdAt:
+          type: string
+          format: date-time
+          example: '2021-06-06T12:00:00.000Z'
+        __v:
+          type: integer
+          example: 0
+      required:
+        - _id
+        - title
+        - description
+        - ingredients
+        - category
+        - instructions
+        - createdAt
+    RecipeInput:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Spaghetti Bolognese
+        description:
+          type: string
+          example: A classic Italian dish with ground beef, tomatoes, and herbs.
+        ingredients:
+          type: array
+          items:
+            type: string
+            example: 1 pound spaghetti
+        category:
+          type: string
+          example: Pasta
+        instructions:
+          type: array
+          items:
+            type: string
+            example: Cook the spaghetti according to package directions.
+      required:
+        - title
+        - description
+        - ingredients
+        - category
+        - instructions

@@ -10,6 +10,8 @@ import UploadRoute from './Routes/v1/UploadRoute.js';
 import ChatRoute from './Routes/v1/ChatRoute.js';
 import MessageRoute from './Routes/v1/MessageRoute.js';
 //import AppError from './utils/appError.js';
+import swaggerUi from'swagger-ui-express';
+import YAML from 'yamljs'; // Import YAML package
 
 //Routes
 //Middleware
@@ -26,7 +28,11 @@ const io = new Server(httpServer, {
     methods: ['GET', 'POST']
   }
 });
+// Load OpenAPI specification from YAML file
+const swaggerDocument = YAML.load('./swagger.yaml');
 
+// Serve Swagger UI at /api-docs route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
