@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node server.js ",
-    "start-dev": " nodemon server.js",
+    "dev": " nodemon server.js",
     "debug": "ndb server.js "
   },
-  "author": "Md Firoz Mia",
+  "author": "Affan Habib",
   "license": "ISC",
   "devDependencies": {
     "eslint-config-airbnb": "^19.0.4",

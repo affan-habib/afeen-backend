@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import AuthRoute from './Routes/v1/AuthRoute.js';
 import UserRoute from './Routes/v1/UserRoute.js';
+import RecipeRoute from './Routes/v1/RecipeRoute.js';
 import PostRoute from './Routes/v1/PostRoute.js';
 import UploadRoute from './Routes/v1/UploadRoute.js';
 import ChatRoute from './Routes/v1/ChatRoute.js';
