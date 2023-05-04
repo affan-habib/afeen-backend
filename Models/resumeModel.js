@@ -6,12 +6,26 @@ const resumeSchema = new mongoose.Schema({
   },
   about: {
     type: String,
-    required: [true, 'Please enter a about.']
+    required: [true, 'Please enter an about.']
   },
-  educations: {
-    type: [String],
-    required: [true, 'Please enter ingredients.']
-  },
+  educations: [{
+    institution: {
+      type: String,
+      required: [true, 'Please enter the name of the institution.']
+    },
+    degree: {
+      type: String,
+      required: [true, 'Please enter the degree obtained.']
+    },
+    fieldOfStudy: {
+      type: String,
+      required: [true, 'Please enter the field of study.']
+    },
+    graduationDate: {
+      type: Date,
+      required: [true, 'Please enter the date of graduation.']
+    }
+  }],
   category: {
     type: String,
     required: [true, 'Please enter a category.']
@@ -25,6 +39,7 @@ const resumeSchema = new mongoose.Schema({
     default: Date.now()
   }
 });
+
 
 const Resume = mongoose.model('Resume', resumeSchema);
 
