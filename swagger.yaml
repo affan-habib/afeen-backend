@@ -33,6 +33,72 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Recipe'
+      /recipes/{id}:
+    parameters:
+      - in: "path"
+        name: "id"
+        description: "ID of recipe to return"
+        required: true
+        type: "integer"
+    get:
+      summary: "Get a recipe by ID"
+      tags:
+        - "Recipes"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/components/schemas/RecipeInput"
+        404:
+          description: "Recipe not found"
+    put:
+      summary: "Update a recipe by ID"
+      tags:
+        - "Recipes"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Recipe object that needs to be updated"
+          required: true
+          schema:
+            $ref: "#/components/schemas/RecipeInput"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/components/schemas/RecipeInput"
+        400:
+          description: "Bad Request"
+        404:
+          description: "Recipe not found"
+    delete:
+      summary: "Delete a recipe by ID"
+      tags:
+        - "Recipes"
+      responses:
+        204:
+          description: "No Content"
+        404:
+          description: "Recipe not found"
+
+  /recipes/filter:
+    get:
+      summary: "Filter recipes by category"
+      tags:
+        - "Recipes"
+      parameters:
+        - in: "query"
+          name: "category"
+          description: "Filter by category"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Recipe"
 components:
   schemas:
     Recipe:
@@ -104,3 +170,179 @@ components:
         - ingredients
         - category
         - instructions
+
+
+
+
+openapi: 3.0.0
+info:
+  title: Resumes API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /api/v1/resume:
+    get:
+      summary: Get all resumes
+      responses:
+        '200':
+          about: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resume'
+    post:
+      summary: Create a new resume
+      requestBody:
+        about: Resume object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResumeInput'
+      responses:
+        '201':
+          about: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resume'
+  /resumes/{id}:
+    parameters:
+      - in: "path"
+        name: "id"
+        about: "ID of resume to return"
+        required: true
+        type: "integer"
+    get:
+      summary: "Get a resume by ID"
+      tags:
+        - "Resumes"
+      responses:
+        200:
+          about: "OK"
+          schema:
+            $ref: "#/components/schemas/ResumeInput"
+        404:
+          about: "Resume not found"
+    put:
+      summary: "Update a resume by ID"
+      tags:
+        - "Resumes"
+      parameters:
+        - in: "body"
+          name: "body"
+          about: "Resume object that needs to be updated"
+          required: true
+          schema:
+            $ref: "#/components/schemas/ResumeInput"
+      responses:
+        200:
+          about: "OK"
+          schema:
+            $ref: "#/components/schemas/ResumeInput"
+        400:
+          about: "Bad Request"
+        404:
+          about: "Resume not found"
+    delete:
+      summary: "Delete a resume by ID"
+      tags:
+        - "Resumes"
+      responses:
+        204:
+          about: "No Content"
+        404:
+          about: "Resume not found"
+
+  /resumes/filter:
+    get:
+      summary: "Filter resumes by category"
+      tags:
+        - "Resumes"
+      parameters:
+        - in: "query"
+          name: "category"
+          about: "Filter by category"
+          required: true
+          type: "string"
+      responses:
+        200:
+          about: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Resume"
+components:
+  schemas:
+    Resume:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          example: 644fd91c51eaefc24989d5c4
+        title:
+          type: string
+          example: Spaghetti Bolognese
+        about:
+          type: string
+          example: A classic Italian dish with ground beef, tomatoes, and herbs.
+        educations:
+          type: array
+          items:
+            type: string
+            example: 1 pound spaghetti
+        category:
+          type: string
+          example: Pasta
+        skills:
+          type: array
+          items:
+            type: string
+            example: Cook the spaghetti according to package directions.
+        createdAt:
+          type: string
+          format: date-time
+          example: '2021-06-06T12:00:00.000Z'
+        __v:
+          type: integer
+          example: 0
+      required:
+        - _id
+        - title
+        - about
+        - educations
+        - category
+        - skills
+        - createdAt
+    ResumeInput:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Spaghetti Bolognese
+        about:
+          type: string
+          example: A classic Italian dish with ground beef, tomatoes, and herbs.
+        educations:
+          type: array
+          items:
+            type: string
+            example: 1 pound spaghetti
+        category:
+          type: string
+          example: Pasta
+        skills:
+          type: array
+          items:
+            type: string
+            example: Cook the spaghetti according to package directions.
+      required:
+        - title
+        - about
+        - educations
+        - category
+        - skills
